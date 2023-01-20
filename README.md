@@ -15,3 +15,5 @@
 ### button_template.json
 
 ![Image alt](https://github.com/immortalserg/Node-Red-template-dashboard/raw/main/img/086.png)
+
+Видео: https://youtu.be/wKUasrffWvA
