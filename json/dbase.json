@@ -1,0 +1,44 @@
+[
+    {
+        "id": "b79d8c697a63c685",
+        "type": "function",
+        "z": "38f2aef3ab17631d",
+        "name": "mysql",
+        "func": "var msg2 = {};\nmsg2.topic = 'INSERT INTO sensor (sensor, data) VALUES (:sensor, :data);';\nmsg2.payload = { sensor: msg.topic, data: msg.payload };\nreturn msg2;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 25,
+        "wires": [
+            [
+                "9563831c332b4448"
+            ]
+        ]
+    },
+    {
+        "id": "9563831c332b4448",
+        "type": "MySQL-Connector",
+        "z": "38f2aef3ab17631d",
+        "server": "efe7fa5b22707bb7",
+        "name": "nodered",
+        "x": 845,
+        "y": 25,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "efe7fa5b22707bb7",
+        "type": "MySQL-Server-Connector",
+        "name": "nodered",
+        "host": "localhost",
+        "port": "3306",
+        "user": "pi",
+        "password": "orangepipc",
+        "tls": false,
+        "database": "nodered"
+    }
+]
