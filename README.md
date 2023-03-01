@@ -19,10 +19,16 @@
 Видео: https://youtu.be/wKUasrffWvA
 
 ### nr_grafana.json
+
 Вставка графиков grafana в Node-red
+
 nr_grafana.json - поток Node-red для вставки grafana в Node-red dashboard
+
 grafana.json - примеры графиков grafana
+
 nodered.sql - создание таблицы для данных
+
 dbase.json - поток в Node-red для записи данных в базу.
-![Image alt](https://github.com/immortalserg/Node-Red-template-dashboard/raw/main/img/0854.png)
+
+![Image alt](https://github.com/immortalserg/Node-Red-template-dashboard/raw/main/img/0854.jpg)
 
