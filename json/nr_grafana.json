@@ -1,0 +1,410 @@
+[
+    {
+        "id": "d2ecd31ef172fa13",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 10,
+        "width": "1",
+        "height": "1",
+        "passthru": true,
+        "label": "24 ч.",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "24",
+        "payloadType": "num",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 90,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "66a2f1519857f818",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 9,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "12 ч.",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "12",
+        "payloadType": "num",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "45c56450bc235af9",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 8,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "1 ч.",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "num",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 30,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "bf943ff376a9404e",
+        "type": "function",
+        "z": "9815c9a9d2305d62",
+        "name": "SetTimeRange",
+        "func": "var p_30d  = 1000*60*60*24*30 ; //30 Days\nvar p_7d  = 1000*60*60*24*7 ; //7 Days\nvar p_1d   =  1000*60*60*24 ; // 1 Day\nvar p_hr = 1000*60*60; //1 Hour\nvar d = new Date();\nvar current = d.getTime();\nvar today0h = d.setHours(0, 0, 0, 0); //Timestamp midnight\nswitch (msg.payload) {\n    case 1:\n        msg.fromdate = \"now-\" + msg.payload + \"h\";\n        msg.enddate = \"now\";\n        break;\n    case 12:\n        msg.fromdate = \"now-\" + msg.payload + \"h\";\n        msg.enddate = \"now\";\n        break;\n    case 24:\n        msg.fromdate = \"now-\" + msg.payload + \"h\";\n        msg.enddate = \"now\";\n        break;\n    case 'yesterday':\n        msg.fromdate = today0h - p_1d\n        msg.enddate = today0h\n        break;\n    case 'week':\n        msg.fromdate = current - p_7d\n        msg.enddate = current\n        break;\n    case 'month':\n        msg.fromdate = current - p_30d\n        msg.enddate = current\n        break;        \n    case 'today':\n        msg.fromdate = \"now/d\";\n        msg.enddate = \"now\";\n        break;\n    default:\n        msg.fromdate = \"\";\n        msg.enddate = \"\";\n        break;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 30,
+        "wires": [
+            [
+                "563fbea2f15a3711",
+                "18e38aab152ca585",
+                "10b0b56b3bf9aba5"
+            ]
+        ]
+    },
+    {
+        "id": "48b4683ee9c3b8fd",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 11,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Вчера",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "yesterday",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "1efdc5b9d3d7236e",
+        "type": "ui_template",
+        "z": "9815c9a9d2305d62",
+        "group": "bbc3532f.41ca7",
+        "name": "Page Got Loaded",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n(function() {\n    (function(scope) {\n        scope.send({payload: \"preload\"}); // this gets sent when the view is opened in the browser\n    })(scope);\n})();\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 105,
+        "y": 90,
+        "wires": [
+            [
+                "d2ecd31ef172fa13"
+            ]
+        ]
+    },
+    {
+        "id": "c9a25831497c7b92",
+        "type": "ui_template",
+        "z": "9815c9a9d2305d62",
+        "group": "bbc3532f.41ca7",
+        "name": "Chart",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "format": "<html>\n<iframe id=\"{{msg.name}}\" width=\"600px\" height=\"300px\" style = \"overflow:hidden; margin:auto; border:0px solid green;\"></iframe>\n<script>\n(function(scope) {\n    scope.$watch('msg', function(msg) {\n        var x = document.getElementById(msg.name);\n        x.setAttribute('src', msg.payload); \n        });\n})(scope);\n</script>\n</html>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 800,
+        "y": 30,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "563fbea2f15a3711",
+        "type": "function",
+        "z": "9815c9a9d2305d62",
+        "name": "Chart1",
+        "func": "const panelid=3\nmsg.name = node.name;\nmsg.payload = \"http://192.168.20.10:3000/d-solo/qDiig1mgk/sensor?orgId=1\"+\n\"&theme=dark\" +\n\"&refresh=1m\" +\n\"&from=\" + msg.fromdate + \n\"&to=\" + msg.enddate + \n\"&panelId=\" + panelid\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 30,
+        "wires": [
+            [
+                "c9a25831497c7b92"
+            ]
+        ]
+    },
+    {
+        "id": "aef2ef86b944b64f",
+        "type": "ui_template",
+        "z": "9815c9a9d2305d62",
+        "group": "bbc3532f.41ca7",
+        "name": "Chart",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "format": "<html>\n<iframe id=\"{{msg.name}}\" width=\"600px\" height=\"300px\"\n    style=\"overflow:hidden; margin:auto; border:0px solid green;\"></iframe>\n<script>\n    (function(scope) {\n    scope.$watch('msg', function(msg) {\n        var x = document.getElementById(msg.name);\n        x.setAttribute('src', msg.payload); \n        });\n})(scope);\n</script>\n\n</html>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 800,
+        "y": 70,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "18e38aab152ca585",
+        "type": "function",
+        "z": "9815c9a9d2305d62",
+        "name": "Chart2",
+        "func": "const panelid=4\nmsg.name = node.name;\nmsg.payload = \"http://192.168.20.10:3000/d-solo/qDiig1mgk/sensor?orgId=1\"+\n\"&theme=dark\" +\n\"&refresh=1m\" +\n\"&from=\" + msg.fromdate + \n\"&to=\" + msg.enddate + \n\"&panelId=\" + panelid\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 70,
+        "wires": [
+            [
+                "aef2ef86b944b64f"
+            ]
+        ]
+    },
+    {
+        "id": "c053e915a9de6e02",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 11,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Сегодня",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "today",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 270,
+        "y": 150,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "56603bf5ea498364",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 11,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Неделя",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "week",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "b21ed2a4a541d742",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 11,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Месяц",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "month",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 210,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "4a1de3c9ecba5660",
+        "type": "ui_button",
+        "z": "9815c9a9d2305d62",
+        "name": "",
+        "group": "bbc3532f.41ca7",
+        "order": 11,
+        "width": "1",
+        "height": "1",
+        "passthru": false,
+        "label": "всё",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "all",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "bf943ff376a9404e"
+            ]
+        ]
+    },
+    {
+        "id": "10b0b56b3bf9aba5",
+        "type": "function",
+        "z": "9815c9a9d2305d62",
+        "name": "Chart3",
+        "func": "const panelid=2\nmsg.name = node.name;\nmsg.payload = \"http://192.168.20.10:3000/d-solo/qDiig1mgk/sensor?orgId=1\"+\n\"&theme=dark\" +\n\"&refresh=1m\" +\n\"&from=\" + msg.fromdate + \n\"&to=\" + msg.enddate + \n\"&panelId=\" + panelid\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 110,
+        "wires": [
+            [
+                "20825fe3d33d2d44"
+            ]
+        ]
+    },
+    {
+        "id": "20825fe3d33d2d44",
+        "type": "ui_template",
+        "z": "9815c9a9d2305d62",
+        "group": "bbc3532f.41ca7",
+        "name": "Chart",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "format": "<html>\n<iframe id=\"{{msg.name}}\" width=\"600px\" height=\"300px\"\n    style=\"overflow:hidden; margin:auto; border:0px solid green;\"></iframe>\n<script>\n    (function(scope) {\n    scope.$watch('msg', function(msg) {\n        var x = document.getElementById(msg.name);\n        x.setAttribute('src', msg.payload); \n        });\n})(scope);\n</script>\n\n</html>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 800,
+        "y": 110,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbc3532f.41ca7",
+        "type": "ui_group",
+        "name": "grafana",
+        "tab": "1ff97cd4.681d5b",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1ff97cd4.681d5b",
+        "type": "ui_tab",
+        "name": "Grafana",
+        "icon": "dashboard",
+        "order": 37,
+        "disabled": false,
+        "hidden": false
+    }
+]
