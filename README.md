@@ -31,9 +31,9 @@ nodered.sql - создание таблицы для данных
 dbase.json - поток в Node-red для записи данных в базу.
 
 в конфиге графана раскоментировать и изменить:
-
+```bash
 allow_embedding = true
-
+```
 в секции:
 ```bash
 [auth.anonymous]
@@ -43,3 +43,4 @@ enabled = true
 
 ![Image alt](https://github.com/immortalserg/Node-Red-template-dashboard/raw/main/img/0854.jpg)
 
+Видео: https://youtu.be/jMbLOceWlAU
